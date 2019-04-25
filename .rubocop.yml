@@ -1,11 +1,11 @@
 AllCops:
   Exclude:
     - vendor/**/*
+    - config/**/*
   TargetRubyVersion: 2.5
 
 Metrics/LineLength:
   Exclude:
-    - config/**/*
     - db/*
     - spec/rails_helper.rb
     - spec/spec_helper.rb
