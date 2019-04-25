@@ -1,0 +1,18 @@
+AllCops:
+  Exclude:
+    - test/**/*
+    - vendor/**/*
+  TargetRubyVersion: 2.5
+
+Metrics/LineLength:
+  Exclude:
+    - config/**/*
+    - db/*
+    - Rakefile
+
+Style/Documentation:
+  Enabled: false
+
+Style/MixinUsage:
+  Exclude:
+    - bin/*
