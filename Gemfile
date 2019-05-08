@@ -17,6 +17,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop', require: false
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'pry-rails'
 end
 
 group :development do
