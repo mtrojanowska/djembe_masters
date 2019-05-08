@@ -1,0 +1,33 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+.nickname {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+img.image-show {
+  width: 400px;
+  height: auto;
+}
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}

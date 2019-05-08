@@ -1,1 +1,16 @@
-<h1>SHOW</h1>
+<h1 align = "center"><%= @artist.nickname %>'s page</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <%= @artist.biography %><br>
+        <%= link_to "Edit an artist", edit_artist_path(@artist), class: "btn btn-xs btn-primary" %>
+        <%= link_to "Return to all Artists", artists_path, class: "btn btn-xs btn-success" %>
+      </div>
+   </div>
+
+
+   <div class="row">
+     <div class="col-xs-6">
+        Born <%= @artist.birthdate %>, <%= @artist.origin %>
+     </div>
+  </div>
