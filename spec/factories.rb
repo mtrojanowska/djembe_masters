@@ -11,4 +11,10 @@ FactoryBot.define do
                 asdjfhjkfhjfhaljfhajdhfldkjshfjdhfjsksh
                 ajfdh jfh lajkhsdlfjh ljkha lsdjkhf lkjhasdf"}
   end
+
+  factory :song do
+    title {"The hooves"}
+    released {"Mar 12 2000"}
+    duration {"10 min."}
+  end
 end
