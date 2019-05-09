@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_165823) do
   end
 
   create_table "songs", force: :cascade do |t|
+<<<<<<< HEAD
     t.string "title", null: false
     t.date "released", null: false
     t.string "duration", null: false
@@ -35,4 +36,13 @@ ActiveRecord::Schema.define(version: 2019_05_20_165823) do
   end
 
   add_foreign_key "songs", "artists"
+=======
+    t.string "title"
+    t.date "released"
+    t.string "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> songs model, migration, basic views, routes
 end
