@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2019_05_20_165823) do
   end
 
   create_table "songs", force: :cascade do |t|
-<<<<<<< HEAD
     t.string "title", null: false
     t.date "released", null: false
     t.string "duration", null: false
@@ -36,19 +35,4 @@ ActiveRecord::Schema.define(version: 2019_05_20_165823) do
   end
 
   add_foreign_key "songs", "artists"
-=======
-    t.string "title"
-    t.date "released"
-    t.string "duration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "artist_id"
-    t.index ["artist_id"], name: "index_songs_on_artist_id"
-  end
-
-<<<<<<< HEAD
->>>>>>> songs model, migration, basic views, routes
-=======
-  add_foreign_key "songs", "artists"
->>>>>>> one-to-many association
 end
