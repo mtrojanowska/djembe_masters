@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Song < ApplicationRecord
+  belongs_to :artist
+
   validates :title, presence: true, uniqueness: true
   validates :released, presence: true
   validate :future_release_time, if: :released

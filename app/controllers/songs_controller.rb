@@ -17,12 +17,12 @@ class SongsController < ApplicationController
   end
 
   def create
-    @song = Song.new(song_params)
+    @song = @artist.songs.create(song_params)
       if @song.save
-        flash[:notice] = "The Song has been successfully crated"
-        redirect_to @song
+        flash[:success] = "The Song has been successfully crated"
+        redirect_to @artist
       else
-        flash[:notice] = "Try again to create the song"
+        flash[:danger] = "Try again to create the song"
         render 'new'
       end
   end
@@ -33,7 +33,7 @@ class SongsController < ApplicationController
       flash[:success] = "The song was successfully updated"
       redirect_to @song
     else
-      flash[:success] = "Try again to update the song"
+      flash[:danger] = "Try again to update the song"
       render 'new'
     end
   end
@@ -42,13 +42,12 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     if @song.destroy
       flash[:success] = "The song was sucessfully destroyed"
-      redirect_to songs_path
+      redirect_to artist_path(@artist)
     else
       flash[:danger] = "The song wasn't destroyed"
       render @song
     end
   end
-
 end
 
 private
