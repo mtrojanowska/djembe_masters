@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
-
+  before_action :find_song, only: [:show, :edit, :update ]
+  before_action :find_the_artist, except: [:index ]
   def index
     @songs = Song.all
   end

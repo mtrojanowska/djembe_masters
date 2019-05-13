@@ -1,4 +1,6 @@
-# frozen_string_literal: true
+class Artist < ApplicationRecord
+  has_many :songs, dependent: :destroy
+
 
 class Artist < ApplicationRecord
   validates :nickname, presence: true
@@ -7,6 +9,7 @@ class Artist < ApplicationRecord
   validate :birthdate_in_the_future, if: :birthdate
   validates :origin, presence: true
   validates :biography, presence: true, length: { minimum: 250 }
+
 end
 
 def birthdate_in_the_future

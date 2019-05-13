@@ -6,7 +6,7 @@
          <%= @artist.biography %><br>
          <%= link_to "Edit an artist", edit_artist_path(@artist), class: "btn btn-xs btn-primary" %>
          <%= link_to "Return to all Artists", artists_path, class: "btn btn-xs btn-success" %>
-          <%= link_to "Create a song", new_artist_song_path(@artist, @artist.songs), class: "btn btn-xs btn-warning" %>
+          <%= link_to "Create a song", new_artist_song_path(@artist), class: "btn btn-xs btn-warning" %>
        </div>
        <div class="col-xs-6">
            <% @artist.songs.each do |song| %>
@@ -24,9 +24,7 @@
              </ul>
            <% end %>
          </div>
-
-
-       <div class="row">
+         <div class="row">
           <div class="col">
              Born <%= @artist.birthdate %>, <%= @artist.origin %>
           </div>

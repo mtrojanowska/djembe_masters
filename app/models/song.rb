@@ -8,6 +8,7 @@ class Song < ApplicationRecord
   validate :future_release_time, if: :released
   validate :past_release_time, if: :released
   validates :duration, presence: true
+  validates :artist_id, presence: true
 end
 
 def future_release_time

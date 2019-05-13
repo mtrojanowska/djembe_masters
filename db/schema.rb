@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_165823) do
     t.string "duration", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "artist_id"
+    t.bigint "artist_id", null: false
     t.index ["artist_id"], name: "index_songs_on_artist_id"
   end
 
