@@ -1,23 +1,25 @@
 class SongsController < ApplicationController
-  before_action :find_song, only: [:show, :edit, :update ]
-  before_action :find_the_artist, except: [:index ]
   def index
     @songs = Song.all
   end
 
   def show
-    @song = Song.find(params[:id])
+    @artist = Artist.find(params[:artist_id])
+    @song = Song.new
   end
 
   def new
+    @artist = Artist.find(params[:artist_id])
     @song = Song.new
   end
 
   def edit
+    @artist = Artist.find(params[:artist_id])
     @song = Song.find(params[:id])
   end
 
   def create
+    @artist = Artist.find(params[:artist_id])
     @song = @artist.songs.create(song_params)
       if @song.save
         flash[:success] = "The Song has been successfully crated"
@@ -29,7 +31,8 @@ class SongsController < ApplicationController
   end
 
   def update
-    @song = Song.find(params[:id])
+    @artist = Artist.find(params[:artist_id])
+    @song = @artist.songs.find(params[:id])
     if @song.update(song_params)
       flash[:success] = "The song was successfully updated"
       redirect_to @song
@@ -40,7 +43,8 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    @song = Song.find(params[:id])
+    @artist = Artist.find(params[:artist_id])
+    @song = @artist.songs.find(params[:id])
     if @song.destroy
       flash[:success] = "The song was sucessfully destroyed"
       redirect_to artist_path(@artist)
