@@ -1,10 +1,11 @@
 class SongsController < ApplicationController
-  before_action :find_song, only: [:show, :edit, :update, :destroy ]
+
   def index
     @songs = Song.all
   end
 
   def show
+    @song = Song.find(params[:id])
   end
 
   def new
@@ -12,6 +13,7 @@ class SongsController < ApplicationController
   end
 
   def edit
+    @song = Song.find(params[:id])
   end
 
   def create
@@ -26,6 +28,7 @@ class SongsController < ApplicationController
   end
 
   def update
+    @song = Song.find(params[:id])
     if @song.update(song_params)
       flash[:success] = "The song was successfully updated"
       redirect_to @song
@@ -36,6 +39,7 @@ class SongsController < ApplicationController
   end
 
   def destroy
+    @song = Song.find(params[:id])
     if @song.destroy
       flash[:success] = "The song was sucessfully destroyed"
       redirect_to songs_path
@@ -50,8 +54,4 @@ end
 private
   def song_params
     params.require(:song).permit(:title, :released, :duration)
-  end
-
-  def find_song
-    @song = Song.find(params[:id])
   end
