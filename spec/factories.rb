@@ -1,5 +1,6 @@
 FactoryBot.define do
 
+
   factory :artist do
     nickname {"Jajo"}
     birthdate {"Dec 8 1974"}
@@ -10,11 +11,19 @@ FactoryBot.define do
                 afh kjdhf jhfkjdhfajshfjkdshfljhflajdfhlajkdhf
                 asdjfhjkfhjfhaljfhajdhfldkjshfjdhfjsksh
                 ajfdh jfh lajkhsdlfjh ljkha lsdjkhf lkjhasdf"}
+
   end
 
   factory :song do
     title {"The hooves"}
     released {"Mar 12 2000"}
     duration {"10 min."}
+         artist
+       
+
+
   end
+
+
+
 end
