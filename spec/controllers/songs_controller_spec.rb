@@ -18,7 +18,6 @@ RSpec.describe SongsController, type: :controller do
 
   describe "GET #show" do
     it "assigns song to @song" do
-
       song = create(:song)
       get :show, params: { id: song.id }
       expect(assigns(:song)).to eq(song)
@@ -26,7 +25,7 @@ RSpec.describe SongsController, type: :controller do
 
     it "renders the show template" do
       song = create(:song)
-      get :show, params: { aid: song.id }
+      get :show, params: { id: song.id }
       expect(response). to render_template :show
     end
   end
@@ -60,18 +59,15 @@ RSpec.describe SongsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Song" do
-
-        song = build(:song)
-        expect(song.new_record?).to be true
+        expect do
+          post :create, params: { song: attributes_for(:song)}
+        end.to change(Song, :count).by(1)
        end
 
-      end
-    end
 
       it "redirects to the @song" do
-        song = create(:song)
-
-        expect(response).to redirect_to(@artist)
+        post :create, params: { song: attributes_for(:song) }
+        expect(response).to redirect_to(Song.last)
       end
     end
 
@@ -81,6 +77,7 @@ RSpec.describe SongsController, type: :controller do
         expect(response).to render_template :new
       end
     end
+  end
 
     describe "PUT #update" do
       context "with valid params" do
@@ -127,3 +124,4 @@ RSpec.describe SongsController, type: :controller do
         end
       end
     end
+  end
