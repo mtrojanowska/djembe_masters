@@ -35,7 +35,7 @@ RSpec.describe Artist, type: :model do
     it "checks the absence of origin" do
       artist = build(:artist, origin: '')
       origin_validation = artist.valid?
-      expect(origin_validations).to be false
+      expect(origin_validation).to be false
     end
 
     it "checks the bio length is too short" do

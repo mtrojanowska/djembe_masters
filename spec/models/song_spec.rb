@@ -32,4 +32,3 @@ RSpec.describe Song, type: :model do
     end
   end
 end
-ongs
