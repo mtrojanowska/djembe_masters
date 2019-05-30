@@ -4,8 +4,7 @@ RSpec.describe Song, type: :model do
   context "validation tests" do
     it "checks song\'s attributes presence" do
       song = build(:song)
-      all_valid_attributes = song.valid?
-      expect(all_valid_attributes).to be true
+      expect{song.save}.to change(Song, :count)
     end
 
     it "checks song\'s title absence" do
@@ -21,13 +20,13 @@ RSpec.describe Song, type: :model do
 
     it "checks the absence of date" do
       song = build(:song, duration: '')
-      duration_validation = song.valid?
-      expect(duration_validation).to eq false
+      song.validate
+      expect(song.save).to be false
     end
 
     it "checks the absence of duration" do
       song = build(:song, duration: '')
-      duration_validation = song.valid?
+      song.validate
       expect(song.errors[:duration].first).to eq("can't be blank")
     end
   end
