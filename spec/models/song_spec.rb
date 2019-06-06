@@ -15,9 +15,9 @@ RSpec.describe Song, type: :model do
     end
 
     it 'checks the uniqueness of title' do
-      song = create(:song, title: "The hooves")
+      song = create(:song, title: 'The hooves')
       song2 = build(:song, title: 'The hooves')
-      expect{ song2.save }.not_to change(Song, :count)
+      expect { song2.save }.not_to change(Song, :count)
     end
 
     it 'checks the absence of date' do
