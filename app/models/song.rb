@@ -2,15 +2,15 @@
 
 class Song < ApplicationRecord
   validates :title, presence: true, uniqueness: true
-  validate :future_release_time
-  validate :past_release_time
   validates :released, presence: true
+  validate :future_release_time, if: :released
+  validate :past_release_time, if: :released
   validates :duration, presence: true
 end
 
 def future_release_time
   errors.add(:released, 'is the future date') if released > Time.now
-  end
+end
 
 def past_release_time
   first_record = 1929

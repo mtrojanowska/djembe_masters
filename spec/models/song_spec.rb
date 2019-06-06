@@ -11,19 +11,18 @@ RSpec.describe Song, type: :model do
 
     it "checks song\'s title absence" do
       song = build(:song, title: '')
-      expect(song.persisted?).to eq false
+      expect(song.valid?).to be false
     end
 
     it 'checks the uniqueness of title' do
-      song = create(:song)
+      song = create(:song, title: "The hooves")
       song2 = build(:song, title: 'The hooves')
-      expect { song2.save }.not_to change(Song, :count)
+      expect{ song2.save }.not_to change(Song, :count)
     end
 
     it 'checks the absence of date' do
-      song = build(:song, duration: '')
-      song.validate
-      expect(song.save).to be false
+      song = build(:song, released: '')
+      expect(song.valid?).to be false
     end
 
     it 'checks the absence of duration' do
