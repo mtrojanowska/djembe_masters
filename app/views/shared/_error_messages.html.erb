@@ -1,14 +1,14 @@
-<% if @artist.errors.any? %>
+<% if model.errors.any? %>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
       <div class="panel panel-danger">
         <div class="panel-heading">
           <h2 class="panel-title">
-            <%= pluralize(@artist.errors.count, 'error') %> prohibited this artist from saving.
+            <%= pluralize(model.errors.count, 'error') %> prohibited this <%= model.class %> from saving.
           </h2>
             <div class="panel-body">
               <ul>
-              <% @artist.errors.full_messages.each do |msg| %>
+              <% model.errors.full_messages.each do |msg| %>
               <li><%= msg %>.</li>
               <% end %>
               </ul>

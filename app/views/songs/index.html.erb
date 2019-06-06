@@ -1,0 +1,13 @@
+
+<h1 align="center">List of songs</h1>
+<div align="center">
+  <% @songs.each do |song| %>
+    <div class="row">
+      <div class="col-sm-12">
+        <h3 class="nickname"><%= song.title %></h3>
+           Released: <%= song.released %>. Duration: <%= song.duration %>
+           <%= link_to "Edit the song", edit_song_path(song), class: "btn btn-xs btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
