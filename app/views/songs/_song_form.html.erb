@@ -1,7 +1,7 @@
 <%= render 'shared/error_messages', model: @song %>
 <div class="row">
   <div class="col-xs-12">
-    <%= form_for([@artist, @artist.songs.build], :html => {class: "form-horizontal", role: "form"}) do |f| %>
+    <%= form_for([@artist, @song], :html => {class: "form-horizontal", role: "form"}) do |f| %>
      <div class="form-group">
       <div class="control-label col-sm-4">
         <%= f.label :title %>

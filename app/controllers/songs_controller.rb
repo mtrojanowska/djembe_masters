@@ -35,10 +35,10 @@ class SongsController < ApplicationController
     @song = @artist.songs.find(params[:id])
     if @song.update(song_params)
       flash[:success] = "The song was successfully updated"
-      redirect_to @song
+      redirect_to @artist
     else
       flash[:danger] = "Try again to update the song"
-      render 'new'
+      render 'edit'
     end
   end
 
