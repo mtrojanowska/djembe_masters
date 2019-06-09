@@ -9,7 +9,6 @@ RSpec.describe SongsController, type: :controller do
       song2 = create(:song, title: "Some title", artist_id: artist.id)
       song3 = create(:song, title: "Some other title", artist_id: artist.id)
       get :index, params: { artist_id: artist.id }
-
       expect(response).to be_success
     end
   end
@@ -22,13 +21,6 @@ RSpec.describe SongsController, type: :controller do
       expect(artist.songs.first).to eq(song)
     end
 
-    # it "renders the show template" do
-    #   artist = create(:artist)
-    #   song = create(:song, artist: artist)
-    #   get :show, params: { artist_id: artist_id }
-    #   expect(response). to redirect_to(artist_pa)
-    # end
-  end
 
   describe "GET #new" do
     it "returns a success response" do
@@ -93,7 +85,7 @@ RSpec.describe SongsController, type: :controller do
           song = create(:song, artist_id: artist.id)
           put :update, params: { id: song.id, song: attributes_for(:song, title: "The ears"), artist_id: artist.id }
           artist.songs.reload
-          expect(artist.song.title).to eq("The ears")
+          expect(artist.songs.first.title).to eq("The ears")
         end
 
         it "redirects to the @song" do
@@ -109,15 +101,13 @@ RSpec.describe SongsController, type: :controller do
           artist = create(:artist)
           song = create(:song, artist_id: artist.id)
           put :update, params: { id: song.id, song: attributes_for(:song, title: ''), artist_id: artist.id }
-          expect(response).to render_template :new
+          expect(response).to render_template :edit
         end
       end
     end
 
 
-
-
-      describe "DELETE #destroy" do
+    describe "DELETE #destroy" do
         context "destroys the song" do
           it "destroys the @song" do
             artist = create(:artist)

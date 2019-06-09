@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-
 RSpec.describe Song, type: :model do
   context 'validation tests' do
     it "checks song\'s attributes presence" do
       artist = create(:artist)
-      song = build(:song, artist: artist)
+      song = build(:song, artist_id: artist.id)
       all_valid_attributes = song.valid?
       expect(all_valid_attributes).to be true
     end

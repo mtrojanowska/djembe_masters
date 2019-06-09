@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 class Artist < ApplicationRecord
   has_many :songs, dependent: :destroy
 
-
-class Artist < ApplicationRecord
   validates :nickname, presence: true
   validates :nickname, uniqueness: { case_sensitive: false }
   validates :birthdate, presence: true
@@ -10,8 +10,7 @@ class Artist < ApplicationRecord
   validates :origin, presence: true
   validates :biography, presence: true, length: { minimum: 250 }
 
-end
-
-def birthdate_in_the_future
-  errors.add(:birthdate, "can't be in the future") if birthdate > Date.today
+  def birthdate_in_the_future
+    errors.add(:birthdate, "can't be in the future") if birthdate > Date.today
+  end
 end
