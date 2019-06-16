@@ -2,13 +2,11 @@
 
 class Song < ApplicationRecord
   belongs_to :artist
-
   validates :title, presence: true, uniqueness: true
   validates :released, presence: true
   validate :future_release_time, if: :released
   validate :past_release_time, if: :released
   validates :duration, presence: true
-  validates :artist_id, presence: true
 end
 
 def future_release_time
