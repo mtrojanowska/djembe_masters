@@ -12,7 +12,7 @@ RSpec.describe Artist, type: :model do
 
     it 'checks artist\'s nickname absence' do
       artist = build(:artist, nickname: '')
-      nickname_validation = artist.valid?
+      artist.valid?
       expect(artist.errors[:nickname][0]).to eq("can't be blank")
     end
 

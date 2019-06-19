@@ -1,54 +1,58 @@
 class SongsController < ApplicationController
-
   def index
     @songs = Song.all
   end
 
   def show
-    @song = Song.find(params[:id])
+    @artist = Artist.find(params[:artist_id])
+    @song = Song.new
   end
 
   def new
+    @artist = Artist.find(params[:artist_id])
     @song = Song.new
   end
 
   def edit
+    @artist = Artist.find(params[:artist_id])
     @song = Song.find(params[:id])
   end
 
   def create
-    @song = Song.new(song_params)
+    @artist = Artist.find(params[:artist_id])
+    @song = @artist.songs.create(song_params)
       if @song.save
-        flash[:notice] = "The Song has been successfully crated"
-        redirect_to @song
+        flash[:success] = "The Song has been successfully crated"
+        redirect_to @artist
       else
-        flash[:notice] = "Try again to create the song"
+        flash[:danger] = "Try again to create the song"
         render 'new'
       end
   end
 
   def update
-    @song = Song.find(params[:id])
+    @artist = Artist.find(params[:artist_id])
+    @song = @artist.songs.find(params[:id])
     if @song.update(song_params)
       flash[:success] = "The song was successfully updated"
-      redirect_to @song
+      redirect_to @artist
     else
-      flash[:success] = "Try again to update the song"
-      render 'new'
+      flash[:danger] = "Try again to update the song"
+      render 'edit'
     end
   end
 
   def destroy
-    @song = Song.find(params[:id])
+    @artist = Artist.find(params[:artist_id])
+    @song = @artist.songs.find(params[:id])
     if @song.destroy
       flash[:success] = "The song was sucessfully destroyed"
-      redirect_to songs_path
+      redirect_to artist_path(@artist)
     else
       flash[:danger] = "The song wasn't destroyed"
       render @song
     end
   end
-
 end
 
 private

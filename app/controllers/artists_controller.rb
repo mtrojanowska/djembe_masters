@@ -1,4 +1,5 @@
 class ArtistsController < ApplicationController
+
   def index
     @artists = Artist.all
   end
@@ -16,7 +17,7 @@ class ArtistsController < ApplicationController
   end
 
   def create
-    @artist = Artist.new(artist_params)
+   @artist = Artist.new(artist_params)
       if @artist.save
         flash[:notice] = "Artist has been successfully created"
         redirect_to @artist

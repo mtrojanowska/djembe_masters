@@ -5,8 +5,10 @@ require 'rails_helper'
 RSpec.describe Song, type: :model do
   context 'validation tests' do
     it "checks song\'s attributes presence" do
-      song = build(:song)
-      expect { song.save }.to change(Song, :count)
+      artist = create(:artist)
+      song = build(:song, artist_id: artist.id)
+      all_valid_attributes = song.valid?
+      expect(all_valid_attributes).to be true
     end
 
     it "checks song\'s title absence" do
