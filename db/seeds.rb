@@ -56,7 +56,71 @@ artist3 = Artist.create(nickname: 'Ubu', birthdate: '12-09-1987', origin: 'RPA',
                                                                       sem sodales. Nunc ullamcorper ultricies commodo.
                                                                       Curabitur eget lectus at ipsum dapibus volutpat
                                                                        eget id dolor. Donec eget nisl felis. Duis.")
+artist4 = Artist.create(nickname: 'Big Boo', birthdate: '12-12-1978', origin: 'Goa', biography: "Lorem ipsum dolor sit amet,
+                                                                               consectetur adipiscing elit. Sed
+                                                                               sodales accumsan velit. Pellentesque
+                                                                               lobortis, sapien et commodo gravida,
+                                                                               diam velit aliquam enim, et rutrum
+                                                                               arcu ante vitae est. Aenean nec risus
+                                                                               eget lorem volutpat luctus. Etiam mattis
+                                                                               rutrum urna ut volutpat. Donec pellentesque
+                                                                               venenatis odio, vitae dignissim libero
+                                                                               bibendum sed. Aliquam erat volutpat. Cras
+                                                                               sit amet tortor a lorem commodo commodo a ut quam.
+                                                                               Donec ut suscipit magna, vitae vulputate erat.
+                                                                               Fusce rutrum metus in est volutpat, ornare rhoncus
+                                                                               sem sodales. Nunc ullamcorper ultricies commodo.
+                                                                               Curabitur eget lectus at ipsum dapibus volutpat
+                                                                                eget id dolor. Donec eget nisl felis. Duis.")
+artist5 = Artist.create(nickname: 'Mayo', birthdate: '12-12-1978', origin: 'Goa', biography: "Lorem ipsum dolor sit amet,
+                                                                                      consectetur adipiscing elit. Sed
+                                                                                      sodales accumsan velit. Pellentesque
+                                                                                      lobortis, sapien et commodo gravida,
+                                                                                      diam velit aliquam enim, et rutrum
+                                                                                      arcu ante vitae est. Aenean nec risus
+                                                                                      eget lorem volutpat luctus. Etiam mattis
+                                                                                      rutrum urna ut volutpat. Donec pellentesque
+                                                                                      venenatis odio, vitae dignissim libero
+                                                                                      bibendum sed. Aliquam erat volutpat. Cras
+                                                                                      sit amet tortor a lorem commodo commodo a ut quam.
+                                                                                      Donec ut suscipit magna, vitae vulputate erat.
+                                                                                      Fusce rutrum metus in est volutpat, ornare rhoncus
+                                                                                      sem sodales. Nunc ullamcorper ultricies commodo.
+                                                                                      Curabitur eget lectus at ipsum dapibus volutpat
+                                                                                       eget id dolor. Donec eget nisl felis. Duis.")
+artist6 = Artist.create(nickname: 'Dooly', birthdate: '12-12-1978', origin: 'Goa', biography: "Lorem ipsum dolor sit amet,
+                                                                                      consectetur adipiscing elit. Sed
+                                                                                      sodales accumsan velit. Pellentesque
+                                                                                      lobortis, sapien et commodo gravida,
+                                                                                      diam velit aliquam enim, et rutrum
+                                                                                      arcu ante vitae est. Aenean nec risus
+                                                                                      eget lorem volutpat luctus. Etiam mattis
+                                                                                      rutrum urna ut volutpat. Donec pellentesque
+                                                                                      venenatis odio, vitae dignissim libero
+                                                                                      bibendum sed. Aliquam erat volutpat. Cras
+                                                                                      sit amet tortor a lorem commodo commodo a ut quam.
+                                                                                      Donec ut suscipit magna, vitae vulputate erat.
+                                                                                      Fusce rutrum metus in est volutpat, ornare rhoncus
+                                                                                      sem sodales. Nunc ullamcorper ultricies commodo.
+                                                                                      Curabitur eget lectus at ipsum dapibus volutpat
+                                                                                       eget id dolor. Donec eget nisl felis. Duis.")
+artist7 = Artist.create(nickname: 'Data', birthdate: '12-12-1978', origin: 'Goa', biography: "Lorem ipsum dolor sit amet,
+                                                                                      consectetur adipiscing elit. Sed
+                                                                                      sodales accumsan velit. Pellentesque
+                                                                                      lobortis, sapien et commodo gravida,
+                                                                                      diam velit aliquam enim, et rutrum
+                                                                                      arcu ante vitae est. Aenean nec risus
+                                                                                      eget lorem volutpat luctus. Etiam mattis
+                                                                                      rutrum urna ut volutpat. Donec pellentesque
+                                                                                      venenatis odio, vitae dignissim libero
+                                                                                      bibendum sed. Aliquam erat volutpat. Cras
+                                                                                      sit amet tortor a lorem commodo commodo a ut quam.
+                                                                                      Donec ut suscipit magna, vitae vulputate erat.
+                                                                                      Fusce rutrum metus in est volutpat, ornare rhoncus
+                                                                                      sem sodales. Nunc ullamcorper ultricies commodo.
+                                                                                      Curabitur eget lectus at ipsum dapibus volutpat
+                                                                                       eget id dolor. Donec eget nisl felis. Duis.")
 song1 = Song.create(title: 'First song', released: '02-02-1999', duration: '14 min', artist_id: artist1.id)
 song2 = Song.create(title: 'Second song', released: '03-03-1999', duration: '4 min', artist_id: artist1.id)
-song3 = Song.create(title: 'Third song', released: '12-12-1999', duration: '10 min', artist_id: artist2.id)
-song4 = Song.create(title: 'Fourth song', released: '11-01-2000', duration: '25 min', artist_id: artist3.id)
+song3 = Song.create(title: 'Third song', released: '12-12-1999', duration: '10 min', artist_id: artist1.id)
+song4 = Song.create(title: 'Fourth song', released: '11-01-2000', duration: '25 min', artist_id: artist1.id)
