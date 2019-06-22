@@ -19,12 +19,15 @@ gem 'bootstrap-sass', '~> 3.4.1'
 
 gem 'jquery-rails'
 
+
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop', require: false
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'pry-rails'
+  gem 'ffaker'
 end
 
 group :development do
