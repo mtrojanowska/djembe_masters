@@ -6,6 +6,7 @@ class Artist < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :songs, dependent: :destroy
+  has_one_attached :avatar
 
   validates :nickname, presence: true
   validates :nickname, uniqueness: { case_sensitive: false }

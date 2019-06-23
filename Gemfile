@@ -17,6 +17,8 @@ gem 'jquery-rails'
 
 gem 'devise'
 
+gem "mini_magick"
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop', require: false

@@ -2,11 +2,16 @@
 
 <%= form_for(@artist, as: @artist, url: registration_path(@artist), html: { method: :put }) do |f| %>
   <%= render "shared/error_messages", model: @artist %>
-  
-  <div class="field">
-    <%= f.label :nickname %><br />
-    <%= f.text_field :nickname, autofocus: true, autocomplete: "email" %>
-  </div>
+
+   <div class="field">
+      <%= f.label :avatar %><br />
+      <%= f.file_field :avatar %>
+   </div>
+
+   <div class="field">
+     <%= f.label :nickname %><br />
+     <%= f.text_field :nickname, autofocus: true, autocomplete: "email" %>
+   </div>
 
   <div class="field">
     <%= f.label :birthdate %><br />
