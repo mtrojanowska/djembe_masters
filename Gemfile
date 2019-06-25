@@ -28,13 +28,14 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'pry-rails'
   gem 'ffaker'
+  gem 'kaminari'
 end
 
 group :development do
   gem 'bullet'
   gem 'spring'
   gem 'web-console', '>= 3.3.0'
-  gem 'kaminari'
+
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

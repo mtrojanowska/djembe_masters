@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe ArtistsController, type: :controller do
   describe 'GET #index' do
     it 'checks index functionality' do
-      artist1 = create(:artist)
+      artist1 = create(:artist, nickname: "Jajo")
       artist2 = create(:artist, nickname: 'Jojo')
       artist3 = create(:artist, nickname: 'Bajo')
       get :index
