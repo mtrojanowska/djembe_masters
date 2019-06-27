@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class SongsController < ApplicationController
+  before_action :song_authorization, only: %i[show edit update destroy]
   PER_PAGE = 3
   def index
     @songs = Song.order(released: :desc).page(params[:page]).per(3)
+    authorize @songs
   end
 
   def show
@@ -14,6 +16,7 @@ class SongsController < ApplicationController
   def new
     @artist = Artist.find(params[:artist_id])
     @song = Song.new
+    authorize @song
   end
 
   def edit
@@ -24,6 +27,8 @@ class SongsController < ApplicationController
   def create
     @artist = Artist.find(params[:artist_id])
     @song = @artist.songs.create(song_params)
+    @song.artist = current_artist
+    authorize @song
     if @song.save
       flash[:success] = 'The Song has been successfully crated'
       redirect_to @artist
@@ -61,4 +66,9 @@ end
 private
 def song_params
   params.require(:song).permit(:title, :released, :duration)
+end
+
+def song_authorization
+  @song = Song.find(params[:id])
+  authorize @song
 end
