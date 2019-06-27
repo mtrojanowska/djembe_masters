@@ -19,6 +19,7 @@ artists = []
     biography: FFaker::LoremPL.paragraphs(2).join
   )
 end
+p artists
 
 song1 = Song.create(title: 'First song', released: '03-03-1999', duration: '4 min', artist_id: artists.first.id)
 song2 = Song.create(title: 'Second song', released: '03-03-1999', duration: '4 min', artist_id: artists.first.id)

@@ -1,7 +1,27 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(@artist, as: @artist, url: registration_path(@artist), html: { method: :put }) do |f| %>
+  <%= render "shared/error_messages", model: @artist %>
+  
+  <div class="field">
+    <%= f.label :nickname %><br />
+    <%= f.text_field :nickname, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthdate %><br />
+    <%= f.text_field :birthdate, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :origin %><br />
+    <%= f.text_field :origin, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :biography %><br />
+    <%= f.text_area :biography, autofocus: true, autocomplete: "email" %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />

@@ -11,7 +11,14 @@
                                          data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" %>
         </div>
       </div>
-    </ul>
   <% end %>
+  <% if current_artist %>
+    <%= link_to "Edit Your account", edit_artist_registration_path(@artist), class: "btn btn-xs btn-warning" %>
+    <%= link_to "Sign out #{@artist}", destroy_artist_session_path, method: :delete, data: { confirm: "Sure to log out?"},class: "btn btn-xs btn-danger"  %>
+  <% else %>
+    <%= link_to "Signup for Artists", new_artist_registration_path, class: "btn btn-xs btn-info"  %>
+    <%= link_to "Sign in the Artist", new_artist_session_path, class: "btn btn-xs btn-warning"  %>
+  <% end %>
+  </ul>
   <%= paginate @artists %>
 </div>
