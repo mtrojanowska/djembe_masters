@@ -16,7 +16,10 @@ artists = []
     nickname: FFaker::Name.name,
     birthdate: FFaker::Time.date,
     origin: FFaker::Address.country,
-    biography: FFaker::LoremPL.paragraphs(2).join
+    biography: FFaker::LoremPL.paragraphs(3).join,
+    email: FFaker::Internet.email,
+    password: FFaker::Internet.password
+
   )
 end
 p artists

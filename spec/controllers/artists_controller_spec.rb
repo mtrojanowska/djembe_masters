@@ -7,6 +7,7 @@ RSpec.describe ArtistsController, type: :controller do
     it 'checks index functionality' do
       artist1 = create(:artist, nickname: "Jajo")
       artist2 = create(:artist, nickname: 'Jojo')
+
       get :index
       expect(assigns(:artists)).to eq([artist1, artist2])
     end
@@ -38,8 +39,10 @@ RSpec.describe ArtistsController, type: :controller do
     end
 
     it 'renders the new template' do
-      get :new
-      expect(response).to render_template :new
+
+  request.env['devise.mapping'] = Devise.mappings[:artist]
+  get :new_user
+      expect(response).to render_template(:sign_up)
     end
   end
 
@@ -60,9 +63,12 @@ RSpec.describe ArtistsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Artist' do
+
         expect do
+            request.env['devise.mapping'] = Devise.mappings[:artist]
           post :create, params: { artist: attributes_for(:artist) }
         end.to change(Artist, :count).by(1)
+
       end
 
       it 'redirects to the @artist' do
@@ -81,10 +87,24 @@ RSpec.describe ArtistsController, type: :controller do
     describe 'PUT #update' do
       context 'valid attributes' do
         it 'updates the requested artist' do
+          request.env['devise.mapping'] = Devise.mappings[:artist]
           artist = create(:artist)
-          put :update, params: { id: artist.id, artist: attributes_for(:artist, nickname: 'Aaaartist') }
-          artist.reload
-          expect(assigns(:artist).nickname).to eq('Aaaartist')
+          sign_in artist
+
+          put :update, params: { id: artist.id, artist: attributes_for(:artist, email: 'jerry@example.com', current_password: "password") }
+
+  artist.reload
+  expect(artist.save).to_not be_a_new(Artist)
+
+
+    expect(assigns(:artist).email).to eq('jerry@example.com')
+
+
+#expect(@user.reload.email).not_to eq(@old_email)
+          # artist = create(:artist)
+          # put :update, params: { id: artist.id, artist: attributes_for(:artist, nickname: 'Aaaartist') }
+          # artist.reload
+          # expect(assigns(:artist).nickname).to eq('Aaaartist')
         end
 
         it 'redirects to the artist' do

@@ -3,6 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe Artist, type: :model do
+
+  context 'authentication' do
+    it "checks the signup parameters" do
+      artist = create(:artist)
+
+
+      expect(assigns(:artist)).to be true
+    end
+end
+
   context 'validation tests' do
     it 'checks artist\'s attributes presence' do
       artist = build(:artist)
@@ -17,8 +27,8 @@ RSpec.describe Artist, type: :model do
     end
 
     it 'checks the uniqueness of nickname' do
-      artist = create(:artist)
-      artist2 = build(:artist, nickname: 'jajo')
+      artist = create(:artist, nickname: 'Jajo')
+      artist2 = build(:artist, nickname: 'Jajo')
       expect { artist2.save }.not_to change(Artist, :count)
     end
 
