@@ -11,11 +11,8 @@ gem 'rails', '~> 5.2.3'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-
 gem 'bootsnap', '>= 1.1.0', require: false
-
 gem 'bootstrap-sass', '~> 3.4.1'
-
 gem 'jquery-rails'
 
 group :development, :test do
@@ -24,6 +21,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'pry-rails'
+  gem 'ffaker'
+  gem 'kaminari'
 end
 
 group :development do

@@ -6,4 +6,21 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   Character.create(name: 'Luke', movie: movies.first
+
+require 'ffaker'
+
+artists = []
+5.times do
+  artists << Artist.create(
+    nickname: FFaker::Name.name,
+    birthdate: FFaker::Time.date,
+    origin: FFaker::Address.country,
+    biography: FFaker::LoremPL.paragraphs(2).join
+  )
+end
+
+song1 = Song.create(title: 'First song', released: '03-03-1999', duration: '4 min', artist_id: artists.first.id)
+song2 = Song.create(title: 'Second song', released: '03-03-1999', duration: '4 min', artist_id: artists.first.id)
+song3 = Song.create(title: 'Third song', released: '12-12-1999', duration: '10 min', artist_id: artists.first.id)
+song4 = Song.create(title: 'Fourth song', released: '11-01-2000', duration: '25 min', artist_id: artists.first.id)
