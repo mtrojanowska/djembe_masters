@@ -5,13 +5,23 @@ require 'rails_helper'
 RSpec.describe Artist, type: :model do
 
   context 'authentication' do
-    it "checks the signup parameters" do
+    it "checks a presense of all signup parameters" do
       artist = create(:artist)
-
-
-      expect(assigns(:artist)).to be true
+      expect(artist.valid?).to be true
     end
-end
+
+    it "checks the wrong password_confirmation" do
+      artist = build(:artist, attributes_for(:artist, password_confirmation: "otherpossword"))
+      artist.validate
+      expect(artist.valid_password?("otherpassword")).to be false
+    end
+    it "checks the correct password_confirmation" do
+      artist = build(:artist, attributes_for(:artist, password_confirmation: "password"))
+      artist.valid?
+      expect(artist.valid?).to be true
+    end
+  end
+
 
   context 'validation tests' do
     it 'checks artist\'s attributes presence' do

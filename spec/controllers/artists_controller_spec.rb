@@ -7,7 +7,6 @@ RSpec.describe ArtistsController, type: :controller do
     it 'checks index functionality' do
       artist1 = create(:artist, nickname: "Jajo")
       artist2 = create(:artist, nickname: 'Jojo')
-
       get :index
       expect(assigns(:artists)).to eq([artist1, artist2])
     end
@@ -39,22 +38,22 @@ RSpec.describe ArtistsController, type: :controller do
     end
 
     it 'renders the new template' do
-
-  request.env['devise.mapping'] = Devise.mappings[:artist]
-  get :new_user
-      expect(response).to render_template(:sign_up)
+      get :new
+      expect(response).to have_http_status "200"
     end
   end
 
   describe 'GET #edit' do
     it 'assigns requested artist to @artist' do
       artist = create(:artist)
+      sign_in artist
       get :edit, params: { id: artist.id }
       expect(assigns(:artist)).to eq(artist)
     end
 
     it 'renders #edit template' do
       artist = create(:artist)
+      sign_in artist
       get :edit, params: { id: artist.id }
       expect(response).to render_template :edit
     end
@@ -63,71 +62,77 @@ RSpec.describe ArtistsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Artist' do
-
-        expect do
-            request.env['devise.mapping'] = Devise.mappings[:artist]
-          post :create, params: { artist: attributes_for(:artist) }
-        end.to change(Artist, :count).by(1)
-
+          expect do
+          post :create, params: { artist: attributes_for(:artist)}
+          end.to change(Artist, :count).by(1)
       end
 
       it 'redirects to the @artist' do
-        post :create, params: { artist: attributes_for(:artist) }
-        expect(response).to redirect_to(Artist.last)
+        expect do
+        post :create, params: { artist: attributes_for(:artist)}
+        end.to change(Artist, :count).by(1)
+        expect(response).to have_http_status '302'
       end
     end
 
     context 'with invalid params' do
-      it 'returns a new template' do
-        post :create, params: { artist: attributes_for(:artist, nickname: '') }
-        expect(response).to render_template :new
+      it 'email and password is not enough' do
+        expect do
+        post :create, params: { artist: attributes_for(:artist, nickname: nil, birthdate: nil, origin: nil, biography: nil) }
+        end.to_not change(Artist, :count)
+        expect(response.code).to render_template :new
       end
     end
+
+    describe "sessions POST #create" do
+      it "logs in with valid params" do
+        artist = create(:artist)
+        sign_in artist
+        expect(response).to have_http_status '200'
+      end
+
+      it "tries to log in with invalid params" do
+        artist = create(:artist, attributes_for(:artist, email: "jaja@example.com", password: "password"))
+        sign_in(build(:artist, attributes_for(:artist, email: "jaja@example.com", password: "somepassword")))
+        expect(response).to redirect_to 'artists/sign_in'
+       end
+     end
 
     describe 'PUT #update' do
       context 'valid attributes' do
         it 'updates the requested artist' do
-          request.env['devise.mapping'] = Devise.mappings[:artist]
           artist = create(:artist)
           sign_in artist
-
           put :update, params: { id: artist.id, artist: attributes_for(:artist, email: 'jerry@example.com', current_password: "password") }
-
-  artist.reload
-  expect(artist.save).to_not be_a_new(Artist)
-
-
-    expect(assigns(:artist).email).to eq('jerry@example.com')
-
-
-#expect(@user.reload.email).not_to eq(@old_email)
-          # artist = create(:artist)
-          # put :update, params: { id: artist.id, artist: attributes_for(:artist, nickname: 'Aaaartist') }
-          # artist.reload
-          # expect(assigns(:artist).nickname).to eq('Aaaartist')
+          expect(artist.reload.email).to eq('jerry@example.com')
         end
 
         it 'redirects to the artist' do
           artist = create(:artist)
+          sign_in artist
           put :update, params: { id: artist.id, artist: attributes_for(:artist, nickname: 'Aaaartist') }
           expect(response).to redirect_to(artist_path(artist))
         end
+      end
 
         context 'invalid attributes' do
           it 'updates the requested artits' do
             artist = create(:artist)
+            sign_in artist
             put :update, params: { id: artist.id, artist: attributes_for(:artist, nickname: '') }
             expect(response).to render_template :new
           end
-        end
+
+
 
         describe 'DELETE #destroy' do
           it 'destroys the requested artist' do
             artist1 = create(:artist)
             artist2 = create(:artist, nickname: 'Jojo')
             artist3 = create(:artist, nickname: 'Boo')
+            sign_in artist1
             expect do
-              delete :destroy, params: { id: artist2.id }
+              delete :destroy, params: { id: artist1.id }
             end.to change(Artist, :count).by(-1)
           end
 
@@ -135,8 +140,9 @@ RSpec.describe ArtistsController, type: :controller do
             artist1 = create(:artist)
             artist2 = create(:artist, nickname: 'Jojo')
             artist3 = create(:artist, nickname: 'Boo')
-            delete :destroy, params: { id: artist1.id }
-            expect(response).to redirect_to(artists_path)
+            sign_in artist1
+              delete :destroy, params: { id: artist1.id }
+            expect(response).to redirect_to '/artists'
           end
         end
       end
