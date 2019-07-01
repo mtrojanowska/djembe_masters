@@ -5,8 +5,12 @@ class SongPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    scope.where(id: record.id).exists?
+  end
+
   def create?
-    artist.present?
+    false
   end
 
   def update?

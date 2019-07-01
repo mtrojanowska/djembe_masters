@@ -8,11 +8,12 @@ class ApplicationController < ActionController::Base
     current_artist
   end
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :artist_not_authorized
 
-  def after_sign_in_path_for(_artist)
-    artist_path(@artist)
+  def after_sign_in_path_for(artist)
+    artist_path(artist)
   end
+
 
   protected
 

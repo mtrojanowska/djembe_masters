@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class SongsController < ApplicationController
-  before_action :song_authorization, only: %i[show edit update destroy]
+  before_action :song_authorization, only: %i[edit update destroy]
+  before_action :authenticate_artist!, except: [:index, :show]
   PER_PAGE = 3
   def index
     @songs = Song.order(released: :desc).page(params[:page]).per(3)
-    authorize @songs
+    
   end
 
   def show

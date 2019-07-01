@@ -4,16 +4,17 @@ class ApplicationPolicy
   attr_reader :artist, :record
 
   def initialize(artist, record)
+    raise Pundit::NotAuthorizedError, "must be logged in" unless artist
     @artist = artist
     @record = record
   end
 
   def index?
-    false
+    true
   end
 
   def show?
-    scope.where(id: record.id).exists?
+    false
   end
 
   def create?
@@ -49,7 +50,11 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope.all
+      if artist
+          scope(@artist)
+       else
+         scope(@artist, @song)
+       end
     end
   end
 end

@@ -6,11 +6,12 @@
          <%= image_tag @artist.avatar.variant(resize: "200x200") if @artist.avatar.attached? %>
       </div>
       <div class="col-xs-6">
-         <%= @artist.biography %><br>
-           <% if current_artist %>
-             <%= link_to "Edit an artist", edit_artist_registration_path(@artist), class: "btn btn-xs btn-primary" %>
+        <%= @artist.biography %><br>
+           <% if current_artist == @artist %>
+              <%= link_to "Edit an artist", edit_artist_registration_path(@artist), class: "btn btn-xs btn-primary" %>
            <% end %>
-             <%= link_to "Return to all Artists", artists_path, class: "btn btn-xs btn-success" %>
+           <%= link_to "Return to all Artists", artists_path, class: "btn btn-xs btn-success" %>
+
       </div>
     </div>
     <div class="row">
@@ -20,12 +21,15 @@
     </div>
     <div class="row">
       <div class="col-xs-4">
-        <% if current_artist %>
+        <% if current_artist == @artist %> %>
+
           <%= link_to "Sign out", destroy_artist_session_path, method: :delete, data: { confirm: "Sure to log out?"},class: "btn btn-xs btn-danger" %>
-        <% end %>
+<% end %>
       </div>
       <div class="col-xs-6">
         <h3 align = "center"> <%= @artist.nickname %>'s songs </h3>
+
+
            <% @artist.songs.each do |song| %>
              <ul class="listing">
                <div class="row">
