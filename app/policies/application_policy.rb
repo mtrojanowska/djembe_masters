@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationPolicy
-  attr_reader :artist, :record
+  attr_reader :current_artist, :record
 
-  def initialize(artist, record)
-    raise Pundit::NotAuthorizedError, "must be logged in" unless artist
-    @artist = artist
+  def initialize(current_artist, record)
+    raise Pundit::NotAuthorizedError, "must be logged in" unless current_artist
+    @current_artist = current_artist
     @record = record
   end
 
@@ -38,22 +38,22 @@ class ApplicationPolicy
   end
 
   def scope
-    Pundit.policy_scope!(artist, record.class)
+    Pundit.policy_scope!(current_current_artist, record.class)
  end
 
   class Scope
-    attr_reader :artist, :scope
+    attr_reader :current_artist, :scope
 
-    def initialize(artist, scope)
-      @artist = artist
+    def initialize(current_artist, scope)
+      @current_artist = current_artist
       @scope = scope
     end
 
     def resolve
-      if artist
-          scope(@artist)
+      if current_artist
+          scope(@current_artist)
        else
-         scope(@artist, @song)
+         scope(@current_artist, @song)
        end
     end
   end

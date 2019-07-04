@@ -32,12 +32,12 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe 'GET #new' do
-    it 'returns a success response' do
-      get :new
-      expect(assigns(:artist)).to be_a_new(Artist)
-    end
+    # it 'returns a success response' do
+    #   get :new
+    #   expect(assigns(:artist)).to be_a_new(Artist)
+    # end
 
-    it 'renders the new template' do
+    it 'returns a success response' do
       get :new
       expect(response).to have_http_status "200"
     end
@@ -71,7 +71,8 @@ RSpec.describe ArtistsController, type: :controller do
         expect do
         post :create, params: { artist: attributes_for(:artist)}
         end.to change(Artist, :count).by(1)
-        expect(response).to have_http_status '302'
+        artist = Artist.last
+        expect(response).to redirect_to(artist_path(artist))
       end
     end
 
@@ -84,26 +85,12 @@ RSpec.describe ArtistsController, type: :controller do
       end
     end
 
-    describe "sessions POST #create" do
-      it "logs in with valid params" do
-        artist = create(:artist)
-        sign_in artist
-        expect(response).to have_http_status '200'
-      end
-
-      it "tries to log in with invalid params" do
-        artist = create(:artist, attributes_for(:artist, email: "jaja@example.com", password: "password"))
-        sign_in(build(:artist, attributes_for(:artist, email: "jaja@example.com", password: "somepassword")))
-        expect(response).to redirect_to 'artists/sign_in'
-       end
-     end
-
     describe 'PUT #update' do
       context 'valid attributes' do
         it 'updates the requested artist' do
           artist = create(:artist)
           sign_in artist
-          put :update, params: { id: artist.id, artist: attributes_for(:artist, email: 'jerry@example.com', current_password: "password") }
+          put :update, params: { id: artist.id, artist: attributes_for(:artist, email: 'jerry@example.com', password: "password", password_confirmation: "password") }
           expect(artist.reload.email).to eq('jerry@example.com')
         end
 

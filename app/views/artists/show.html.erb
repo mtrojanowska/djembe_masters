@@ -8,7 +8,8 @@
       <div class="col-xs-6">
         <%= @artist.biography %><br>
            <% if current_artist == @artist %>
-              <%= link_to "Edit an artist", edit_artist_registration_path(@artist), class: "btn btn-xs btn-primary" %>
+              <%= link_to "Edit yourself", edit_artist_registration_path(@artist), class: "btn btn-xs btn-primary" %>
+              <%= link_to "Create a song", new_artist_song_path(@artist), class: "btn btn-xs btn-warning" %>
            <% end %>
            <%= link_to "Return to all Artists", artists_path, class: "btn btn-xs btn-success" %>
 
@@ -21,12 +22,12 @@
     </div>
     <div class="row">
       <div class="col-xs-4">
-        <% if current_artist == @artist %> %>
-
+        <% if current_artist == @artist %>
           <%= link_to "Sign out", destroy_artist_session_path, method: :delete, data: { confirm: "Sure to log out?"},class: "btn btn-xs btn-danger" %>
 <% end %>
       </div>
       <div class="col-xs-6">
+        <% if @artist.songs.any? %>
         <h3 align = "center"> <%= @artist.nickname %>'s songs </h3>
 
 
@@ -37,7 +38,7 @@
                      Title: <h4 class="nickname"><%= song.title %></h4>
                      <li>Released: <%= song.released %>. Duration: <%= song.duration %>
 
-                           <%= link_to "Create a song", new_artist_song_path(@artist), class: "btn btn-xs btn-warning" %>
+
                            <%= link_to "Edit the song", edit_artist_song_path(@artist, song), class: "btn btn-xs btn-primary" %>
                            <%= link_to "Delete the song", artist_song_path(@artist, song), method: :delete,
                            data: { confirm: "Are you sure?"}, class: "btn btn-xs btn-danger" %>
@@ -46,6 +47,7 @@
                   </div>
                </div>
              </ul>
+           <% end %>
            <% end %>
          </div>
       </div>

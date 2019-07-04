@@ -5,7 +5,7 @@ class ArtistPolicy < ApplicationPolicy
   end
 
   def update?
-    false
+    artist.id == current_artist.id
   end
 
   def edit?
@@ -13,6 +13,12 @@ class ArtistPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    artist.id == current_artist.id
+  end
+
+private
+
+  def artist
+    record
   end
 end
