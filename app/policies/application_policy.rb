@@ -4,7 +4,7 @@ class ApplicationPolicy
   attr_reader :current_artist, :record
 
   def initialize(current_artist, record)
-    raise Pundit::NotAuthorizedError, "must be logged in" unless current_artist
+    raise Pundit::NotAuthorizedError, 'must be logged in' unless current_artist
     @current_artist = current_artist
     @record = record
   end
@@ -51,9 +51,9 @@ class ApplicationPolicy
 
     def resolve
       if current_artist
-          scope(@current_artist)
-       else
-         scope(@current_artist, @song)
+        scope(@current_artist)
+      else
+        scope(@current_artist, @song)
        end
     end
   end
