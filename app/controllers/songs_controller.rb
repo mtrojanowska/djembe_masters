@@ -2,11 +2,10 @@
 
 class SongsController < ApplicationController
   before_action :song_authorization, only: %i[edit update destroy]
-  before_action :authenticate_artist!, except: [:index, :show]
+  before_action :authenticate_artist!, except: %i[index show]
   PER_PAGE = 3
   def index
     @songs = Song.order(released: :desc).page(params[:page]).per(PER_PAGE)
-
   end
 
   def show
@@ -38,7 +37,6 @@ class SongsController < ApplicationController
   end
 
   def update
-    # @artist = Artist.find(params[:artist_id])
     @song = current_artist.songs.find(params[:id])
     if @song.update(song_params)
       flash[:success] = 'The song was successfully updated'
@@ -50,7 +48,6 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    # @artist = Artist.find(params[:artist_id])
     @song = current_artist.songs.find(params[:id])
     if @song.destroy
       flash[:success] = 'The song was sucessfully destroyed'
