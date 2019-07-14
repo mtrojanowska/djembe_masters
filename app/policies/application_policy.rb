@@ -41,20 +41,5 @@ class ApplicationPolicy
     Pundit.policy_scope!(current_current_artist, record.class)
  end
 
-  class Scope
-    attr_reader :current_artist, :scope
-
-    def initialize(current_artist, scope)
-      @current_artist = current_artist
-      @scope = scope
-    end
-
-    def resolve
-      if current_artist
-        scope(@current_artist)
-      else
-        scope(@current_artist, @song)
-       end
-    end
-  end
+  
 end
