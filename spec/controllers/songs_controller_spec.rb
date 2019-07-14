@@ -25,12 +25,14 @@ RSpec.describe SongsController, type: :controller do
   describe "GET #new" do
     it "returns a success response" do
       artist = create(:artist)
+      sign_in artist
       get :new, params: { artist_id: artist.id }
       expect(assigns(:song)).to be_a_new(Song)
     end
 
     it "renders the new template" do
       artist = create(:artist)
+      sign_in artist
       get :new, params: { artist_id: artist.id }
       expect(response).to render_template :new
     end
@@ -39,6 +41,7 @@ RSpec.describe SongsController, type: :controller do
   describe "GET #edit" do
     it "assigns requested song to @song" do
       artist = create(:artist)
+      sign_in artist
       song = create(:song, artist_id: artist.id)
       get :edit, params: { id: song.id, artist_id: artist.id }
       expect(assigns(:song)).to eq(song)
@@ -46,6 +49,7 @@ RSpec.describe SongsController, type: :controller do
 
     it "renders the edit template" do
       artist = create(:artist)
+      sign_in artist
       song = create(:song, artist_id: artist.id)
       get :edit, params: { id: song.id, artist_id: artist.id }
       expect(response).to render_template :edit
@@ -56,6 +60,7 @@ RSpec.describe SongsController, type: :controller do
     context "with valid params" do
       it "creates a new Song" do
         artist = create(:artist)
+        sign_in artist
         expect do
           post :create, params: { song: attributes_for(:song), artist_id: artist.id }
         end.to change(Song, :count).by(1)
@@ -64,6 +69,7 @@ RSpec.describe SongsController, type: :controller do
 
       it "redirects to the @song" do
         artist = create(:artist)
+        sign_in artist
         post :create, params: { song: attributes_for(:song), artist_id: artist.id }
         expect(response).to redirect_to(artist_path(artist))
       end
@@ -72,6 +78,7 @@ RSpec.describe SongsController, type: :controller do
      context "with invalid params" do
       it "returns a new template" do
         artist = create(:artist)
+        sign_in artist
         post :create, params: { song: attributes_for(:song, title: ''), artist_id: artist.id }
         expect(response).to render_template :new
       end
@@ -82,6 +89,7 @@ RSpec.describe SongsController, type: :controller do
       context "with valid params" do
         it "updates the song" do
           artist = create(:artist)
+          sign_in artist
           song = create(:song, artist_id: artist.id)
           put :update, params: { id: song.id, song: attributes_for(:song, title: "The ears"), artist_id: artist.id }
           artist.songs.reload
@@ -90,6 +98,7 @@ RSpec.describe SongsController, type: :controller do
 
         it "redirects to the @song" do
           artist = create(:artist)
+          sign_in artist
           song = create(:song, artist_id: artist.id)
           put :update, params: { id: song.id, song: attributes_for(:song, title: "The ears"), artist_id: artist.id }
           expect(response).to redirect_to(artist_path(artist))
@@ -99,6 +108,7 @@ RSpec.describe SongsController, type: :controller do
     context "with invalid params" do
         it "renders the update template" do
           artist = create(:artist)
+          sign_in artist
           song = create(:song, artist_id: artist.id)
           put :update, params: { id: song.id, song: attributes_for(:song, title: ''), artist_id: artist.id }
           expect(response).to render_template :edit
@@ -111,6 +121,7 @@ RSpec.describe SongsController, type: :controller do
         context "destroys the song" do
           it "destroys the @song" do
             artist = create(:artist)
+            sign_in artist
             song1 = create(:song, artist_id: artist.id)
             song2 = create(:song, title: "Some title", artist_id: artist.id)
             song3 = create(:song, title: "Some other title", artist_id: artist.id)
@@ -121,6 +132,7 @@ RSpec.describe SongsController, type: :controller do
 
           it "redirects to songs" do
             artist = create(:artist)
+            sign_in artist
             song1 = create(:song, artist_id: artist.id)
             song2 = create(:song, title: "Some title", artist_id: artist.id)
             song3 = create(:song, title: "Some other title", artist_id: artist.id)

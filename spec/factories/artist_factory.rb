@@ -1,14 +1,12 @@
 FactoryBot.define do
   factory :artist do
-    nickname {"Jajo"}
-    birthdate {"Dec 8 1974"}
-    origin {"Nigeria"}
-    biography {"Paoi sdafi fj fjhasfjhsdjfh sjfsjhfsdh f
-                ausdufhlf ufh aufhjkhdflahfjdhfjdhfjhalsjdf
-                afysdaufydsufyh udhfdsjfhljsdkhfsjadhfjshfa
-                afh kjdhf jhfkjdhfajshfjkdshfljhflajdfhlajkdhf
-                asdjfhjkfhjfhaljfhajdhfldkjshfjdhfjsksh
-                ajfdh jfh lajkhsdlfjh ljkha lsdjkhf lkjhasdf"}
+    nickname {FFaker::Name.name}
+    birthdate {'12-11-1986'}
+    origin {FFaker::Address.country}
+    biography {FFaker::LoremPL.paragraphs(3).join}
+    email {FFaker::Internet.email}
+    password {'password'}
+    password_confirmation {'password'}
   end
 
 end

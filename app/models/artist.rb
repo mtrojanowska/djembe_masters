@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 class Artist < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   has_many :songs, dependent: :destroy
+  has_one_attached :avatar
 
   validates :nickname, presence: true
   validates :nickname, uniqueness: { case_sensitive: false }

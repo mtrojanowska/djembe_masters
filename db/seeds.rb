@@ -16,9 +16,12 @@ artists = []
     nickname: FFaker::Name.name,
     birthdate: FFaker::Time.date,
     origin: FFaker::Address.country,
-    biography: FFaker::LoremPL.paragraphs(2).join
-  )
+    biography: FFaker::LoremPL.paragraphs(3).join,
+    email: "johndoe@example.com",
+    password: "password"
+ )
 end
+
 
 song1 = Song.create(title: 'First song', released: '03-03-1999', duration: '4 min', artist_id: artists.first.id)
 song2 = Song.create(title: 'Second song', released: '03-03-1999', duration: '4 min', artist_id: artists.first.id)

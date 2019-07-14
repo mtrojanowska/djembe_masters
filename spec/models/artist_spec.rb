@@ -3,6 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe Artist, type: :model do
+
+  context 'authentication' do
+    it "checks a presense of all signup parameters" do
+      artist = create(:artist)
+      expect(artist.valid?).to be true
+    end
+
+    it "checks the wrong password_confirmation" do
+      artist = build(:artist, attributes_for(:artist, password_confirmation: "otherpossword"))
+      artist.validate
+      expect(artist.valid_password?("otherpassword")).to be false
+    end
+    it "checks the correct password_confirmation" do
+      artist = build(:artist, attributes_for(:artist, password_confirmation: "password"))
+      artist.valid?
+      expect(artist.valid?).to be true
+    end
+  end
+
+
   context 'validation tests' do
     it 'checks artist\'s attributes presence' do
       artist = build(:artist)
@@ -17,8 +37,8 @@ RSpec.describe Artist, type: :model do
     end
 
     it 'checks the uniqueness of nickname' do
-      artist = create(:artist)
-      artist2 = build(:artist, nickname: 'jajo')
+      artist = create(:artist, nickname: 'Jajo')
+      artist2 = build(:artist, nickname: 'Jajo')
       expect { artist2.save }.not_to change(Artist, :count)
     end
 
