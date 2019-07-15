@@ -11,6 +11,7 @@ require 'rspec/rails'
 require 'support/factory_bot'
 
 require 'devise'
+require 'kaminari'
 
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
